@@ -2,7 +2,7 @@
 
 # GraphQL Summit Graph
 
-[GraphQL Summit](https://summit.graphql.com/) is the world's largest conference dedicated to GraphQL. This repo contains a simple demo GRANDstack app to explore the conference sessions and show personalized recommendations using:
+[GraphQL Summit](https://summit.graphql.com/) is the world's largest conference dedicated to GraphQL. This repo contains a simple demo [GRANDstack](https://grandstack.io) app to explore the conference sessions and show personalized recommendations using:
 
 **GRANDstack**
 
