@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "name": "graphql-summit-graph-api",
+    "builds": [
+      { "src": "index.js", "use": "@now/node-server" }
+    ],
+    "routes": [
+      { "src": "/", "dest": "index.js" }
+      
+    ],
+    "env": {
+      "REACT_APP_GRAPHQL_URI": "/graphql",
+      "NEO4J_URI": "@neo4j_uri_summit",
+      "NEO4J_USER": "@neo4j_user_summit",
+      "NEO4J_PASSWORD": "@neo4j_password_summit"
+    }
+  }
