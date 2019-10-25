@@ -15,8 +15,8 @@
     "apollo-server": "^2.6.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "dotenv": "^8.0.0",
-    "neo4j-driver": "1.7.5",
-    "neo4j-graphql-js": "2.6.3",
+    "neo4j-driver": "^1.7.6",
+    "neo4j-graphql-js": "^2.8.0",
     "nodemon": "^1.19.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0"
