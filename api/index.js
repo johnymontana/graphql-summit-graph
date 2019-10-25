@@ -8,23 +8,48 @@ dotenv.config();
 
 const typeDefs = /* GraphQL */ `
 type Company {
-   name: String
-   employees: [Speaker] @relation(name: "WORKS_FOR", direction: "IN")
+   name: String!
+   employees: WorksFor
+}
+
+type WorksFor @relation(name:"WORKS_FOR") {
+  from: Speaker
+  to: Company
+  role: String
 }
 
 type Speaker {
-   name: String
-   pic: String
-   title: String
-   worksFor: Company @relation(name: "WORKS_FOR", direction: "OUT")
+   name: String!
+   image: String
+   website: String
+   github: String
+   twitter: String
+
+   worksFor: WorksFor
    presents: [Session] @relation(name: "PRESENTS", direction: "OUT")
 }
 
 type Session {
-   title: String
-   description: String
-   presentedBy: Speaker @relation(name: "PRESENTS", direction: "OUT")
+   title: String!
+   abstract: String
+   date: DateTime
+   format: String
+   level: String
+   presentedBy: [Speaker] @relation(name: "PRESENTS", direction: "OUT")
+   room: Room @relation(name: "IN_ROOM", direction: "OUT")
+   theme: Theme @relation(name: "HAS_THEME", direction: "OUT")
 }
+
+type Room {
+  name: String!
+  sessions: [Session] @relation(name: "IN_ROOM", direction: "IN")
+}
+
+type Theme {
+  name: String!
+  sessions: [Session] @relation(name: "HAS_THEME", direction: "IN")
+}
+
 `;
 
 /*

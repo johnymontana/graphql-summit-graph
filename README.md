@@ -1,4 +1,4 @@
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/johnymontana/NODES2019-GRANDstack&env=NEO4J_USER&env=NEO4J_URI&env=NEO4J_PASSWORD)
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/johnymontana/graphql-summit-graph&env=NEO4J_USER&env=NEO4J_URI&env=NEO4J_PASSWORD)
 
 # GraphQL Summit Graph
 
@@ -15,7 +15,40 @@
 
 ![](images/neo4j.png)
 
-The data for the app is stored in Neo4j graph database. You can download Neo4j locally or spin up a Neo4j Sandbox. The Python [import script in `/import`](import/scrape_schedule.ipynb) will scrape the GraphQL Summit speakers page and load the data into Neo4j.
+The data for the app is stored in Neo4j graph database. You can download Neo4j locally or spin up a Neo4j Sandbox.
+
+To import the GraphQL Summit schedule data into Neo4j, run this query in Neo4j Browser:
+
+```Cypher
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/johnymontana/graphql-summit-graph/master/data/summit_schedule.csv" AS row 
+
+MERGE (s:Session {title: row.title})
+SET 
+  s.date     = datetime({epochMillis: apoc.date.parse(row.date, 'ms', 'MM/dd/yyyy HH:mm a')}),
+  s.level    = row.audience,
+  s.format   = row.format,
+  s.abstract = row.abstract,
+  s.title    = row.title
+
+MERGE (sp:Speaker {name: row.name})
+SET
+  sp.twitter = row.twitter,
+  sp.github  = row.github,
+  sp.website = row.website,
+  sp.image   = coalesce(row.image, row.headshot)
+
+MERGE (sp)-[:PRESENTS]->(s)
+
+MERGE (cp:Company {name: row.organization})
+MERGE (cp)<-[wf:WORKS_FOR]-(sp)
+SET wf.role = row.role
+
+MERGE (th:Theme {name: row.theme})
+MERGE (th)<-[:HAS_THEME]-(s)
+
+MERGE (r:Room {name: row.track})
+MERGE (r)<-[:IN_ROOM]-(s)
+```
 
 
 ## GraphQL API
