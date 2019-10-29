@@ -71,7 +71,15 @@ cd api
 npm install)
 ```
 
-*Add Neo4j credentials to 
+*Add Neo4j credentials to .env*
+
+Edit the `.env` file, adding the connection credentials for your Neo4j database:
+
+```
+TODO: .env example
+```
+
+TODO: annotated sandbox screenshot
 
 *Start API server*
 ```
