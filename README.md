@@ -13,9 +13,9 @@
 
 Follow these steps to get the GraphQL Summit Graph up and running:
 
-1. Download Neo4j and import the schedule data
-2. Run the Node.js GraphQL API app t
-3. Query the GraphQL Summit Graph using GraphQL Playground!
+1. [Download Neo4j and import the schedule data](https://github.com/johnymontana/graphql-summit-graph#neo4j)
+2. [Run the Node.js GraphQL API app using neo4j-graphql.js](https://github.com/johnymontana/graphql-summit-graph#graphql-api)
+3. [Query the GraphQL Summit Graph using GraphQL Playground!](https://github.com/johnymontana/graphql-summit-graph#query-using-graphql-playground)
 
 
 ## Neo4j
