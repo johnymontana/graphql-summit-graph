@@ -24,7 +24,11 @@ Follow these steps to get the GraphQL Summit Graph up and running:
 
 The data for the app is stored in Neo4j graph database. You can [download Neo4j Desktop locally](https://neo4j.com/download/) or [spin up a blank Neo4j Sandbox.](https://neo4j.com/sandbox-v2/)
 
-To import the GraphQL Summit schedule data into Neo4j, run this query in Neo4j Browser by copy/pasting it in the query editor in Neo4j Browser;
+*If you are using Neo4j Desktop you'll need to install the APOC standard library by clicking "Add Plugin" then select Install for APOC*. Neo4j Sandbox already include APOC so if using Sandbox this step is not necessary.
+
+![](images/apoc.png)
+
+To import the GraphQL Summit schedule data into Neo4j, run this query in Neo4j Browser by copy/pasting it in the query editor in Neo4j Browser:
 
 ```Cypher
 LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/johnymontana/graphql-summit-graph/master/data/summit_schedule.csv" AS row 
