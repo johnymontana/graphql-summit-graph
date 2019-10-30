@@ -25,6 +25,16 @@ type Company {
   employees: [Speaker] @relation(name: "WORKS_FOR", direction: "IN")
 }
 
+type Room {
+  name: String!
+  sessions: [Session] @relation(name: "IN_ROOM", direction: "IN")
+}
+
+type Theme {
+  name: String!
+  sessions: [Session] @relation(name: "HAS_THEME", direction: "IN")
+}
+
 type Session {
    title: String!
    abstract: String
@@ -34,16 +44,10 @@ type Session {
    presentedBy: [Speaker] @relation(name: "PRESENTS", direction: "IN")
    room: Room @relation(name: "IN_ROOM", direction: "OUT")
    theme: Theme @relation(name: "HAS_THEME", direction: "OUT")
-}
-
-type Room {
-  name: String!
-  sessions: [Session] @relation(name: "IN_ROOM", direction: "IN")
-}
-
-type Theme {
-  name: String!
-  sessions: [Session] @relation(name: "HAS_THEME", direction: "IN")
+   recommended(first: Int = 3): [Session] @cypher(statement: """ 
+    MATCH (this)-[]->()<-[]-(rec:Session)
+    RETURN rec ORDER by rec DESC LIMIT $first
+   """)
 }
 
 `;
