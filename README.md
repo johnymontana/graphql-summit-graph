@@ -42,13 +42,13 @@ SET
   sp.twitter = row.twitter,
   sp.github  = row.github,
   sp.website = row.website,
+  sp.role    = row.role,
   sp.image   = coalesce(row.image, row.headshot)
 
 MERGE (sp)-[:PRESENTS]->(s)
 
 MERGE (cp:Company {name: row.organization})
 MERGE (cp)<-[wf:WORKS_FOR]-(sp)
-SET wf.role = row.role
 
 MERGE (th:Theme {name: row.theme})
 MERGE (th)<-[:HAS_THEME]-(s)
@@ -97,7 +97,7 @@ Then start the GraphQL API application, which will connect to your Neo4j instanc
 
 *Start API server*
 ```
-npm run start
+DEBUG=neo4j-graphql.js npm run start
 ```
 
 ## Query Using GraphQL Playground

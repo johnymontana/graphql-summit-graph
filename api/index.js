@@ -7,16 +7,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const typeDefs = /* GraphQL */ `
-type Company {
-   name: String!
-   employees: WorksFor
-}
-
-type WorksFor @relation(name:"WORKS_FOR") {
-  from: Speaker
-  to: Company
-  role: String
-}
 
 type Speaker {
    name: String!
@@ -24,9 +14,15 @@ type Speaker {
    website: String
    github: String
    twitter: String
+   role: String
 
-   worksFor: WorksFor
+   worksFor: [Company] @relation(name: "WORKS_FOR", direction: "OUT")
    presents: [Session] @relation(name: "PRESENTS", direction: "OUT")
+}
+
+type Company {
+  name: String!
+  employees: [Speaker] @relation(name: "WORKS_FOR", direction: "IN")
 }
 
 type Session {
@@ -35,7 +31,7 @@ type Session {
    date: DateTime
    format: String
    level: String
-   presentedBy: [Speaker] @relation(name: "PRESENTS", direction: "OUT")
+   presentedBy: [Speaker] @relation(name: "PRESENTS", direction: "IN")
    room: Room @relation(name: "IN_ROOM", direction: "OUT")
    theme: Theme @relation(name: "HAS_THEME", direction: "OUT")
 }
