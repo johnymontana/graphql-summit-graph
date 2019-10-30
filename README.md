@@ -68,22 +68,36 @@ A GraphQL API fetches data from Neo4j using the [`neo4j-graphql.js`](https://gra
 
 ```
 cd api
-npm install)
+npm install
 ```
 
 *Add Neo4j credentials to .env*
 
-Edit the `.env` file, adding the connection credentials for your Neo4j database:
+Edit the `.env` file, adding the connection credentials for your Neo4j database. For example, if using Neo4j Sandbox, check the "Details" tab for your sandbox credentials:
+
+![](images/sandbox.png)
+
+then in your `.env` file:
 
 ```
-TODO: .env example
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=ways-nails-radians
+NEO4J_URI=bolt://ws-10-0-1-240-33773.neo4jsandbox.com:443
 ```
 
-TODO: annotated sandbox screenshot
+if you are using Neo4j Desktop locally, then you `.env` file should be:
+
+```
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=<THE_DATABASE_PASSWORD_YOU_SET_WHEN_CREATING_IT_HERE>
+NEO4J_URI=bolt://localhost:7687
+```
+
+Then start the GraphQL API application, which will connect to your Neo4j instance, translate GraphQL requests to Cypher and handle data fetching. This will start the API app at `http://localhost:4001` by default:
 
 *Start API server*
 ```
-npm start
+npm run start
 ```
 
 ## Query Using GraphQL Playground
