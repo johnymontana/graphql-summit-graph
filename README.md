@@ -24,7 +24,7 @@ Follow these steps to get the GraphQL Summit Graph up and running:
 
 The data for the app is stored in Neo4j graph database. You can [download Neo4j Desktop locally](https://neo4j.com/download/) or [spin up a blank Neo4j Sandbox.](https://neo4j.com/sandbox-v2/)
 
-*If you are using Neo4j Desktop you'll need to install the APOC standard library by clicking "Add Plugin" then select Install for APOC*. Neo4j Sandbox already include APOC so if using Sandbox this step is not necessary.
+*If you are using Neo4j Desktop you'll need to install the APOC standard library by clicking "Add Plugin" then select Install for APOC*. Neo4j Sandbox already includes APOC so if using Sandbox this step is not necessary.
 
 ![](images/apoc.png)
 
@@ -112,8 +112,29 @@ Navigate to `http://localhost:4001` in a web browser to load GraphQL Playground,
 
 Here are some interesting GraphQL queries you can try:
 
+**Find sessions with "resolver" in the abstract and recommended sessions**
 
 ```GraphQL
-TODO: insert interesting GraphQL queries
+{
+  Session(filter: { abstract_contains: "resolver" }) {
+    title
+    abstract
+    room {
+      name
+    }
+    theme {
+      name
+    }
+    presentedBy {
+      name
+      worksFor {
+        name
+      }
+    }
+    recommended {
+      title
+    }
+  }
+}
 ```
 
