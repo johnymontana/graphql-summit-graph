@@ -77,7 +77,7 @@ npm install
 
 *Add Neo4j credentials to .env*
 
-Edit the `.env` file, adding the connection credentials for your Neo4j database. For example, if using Neo4j Sandbox, check the "Details" tab for your sandbox credentials:
+Edit the `.env` file, adding the connection credentials for your Neo4j database. If using Neo4j Sandbox, check the "Details" tab for your sandbox credentials. The value for `NEO4J_URI` will be of the format `bolt://<IP_ADDRESS>:<BOLT_PORT>`. For example, given the sandbox instance:
 
 ![](images/sandbox.png)
 
@@ -86,10 +86,10 @@ then in your `.env` file:
 ```
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=ways-nails-radians
-NEO4J_URI=bolt://ws-10-0-1-240-33773.neo4jsandbox.com:443
+NEO4J_URI=bolt://54.236.16.222:33773
 ```
 
-if you are using Neo4j Desktop locally, then you `.env` file should be:
+If you are using Neo4j Desktop locally, then you `.env` file should be:
 
 ```
 NEO4J_USER=neo4j
